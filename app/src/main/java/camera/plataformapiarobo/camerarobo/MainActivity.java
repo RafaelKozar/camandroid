@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
@@ -24,7 +26,8 @@ public class MainActivity extends Activity {
 
     //0 parar, 1 frente, 2 direita, 3 esquerda, 4 para atraz
     private String url = "http://104.131.163.197:3000/";
-    private String comando = "4";
+    private int comando = 4, antComando = 4;
+    private TextView tComando;
     private Button bt;
 
     private Socket mSocket;
@@ -41,30 +44,34 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bt = (Button) findViewById(R.id.enviar);
-
+        tComando = (TextView) findViewById(R.id.text_comando);
         String teste = "hahaha";
         mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
         mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
 
-        //mSocket.emit("enviar", "teste");
-
         mSocket.on("comando", onComando);
         mSocket.connect();
 
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSocket.emit("enviar", "hahhuahua");
-            }
-        });
     }
 
     private Emitter.Listener onComando = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
             JSONObject data = (JSONObject) args[0];
-            Log.i("rere", "haha");
+
+            try {
+                comando = data.getInt("comando");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if(comando != antComando){
+                //faz alguma coisa
+                antComando = comando;
+            }
+            if(comando == 1)
+                tComando.setText("para frente");
+            else
+                tComando.setText("novo comando");
         }
     };
 
