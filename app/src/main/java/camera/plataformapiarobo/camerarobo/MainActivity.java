@@ -18,14 +18,16 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import org.xwalk.core.XWalkView;
 
+import org.xwalk.core.internal.XWalkSettings;
+
 
 /**
  * Created by Lince on 28/10/2015.
  */
 public class MainActivity extends Activity {
     //private String url = "http://192.168.25.63:3000";
-    //private String camera = "http://192.168.25.63:3000/camera4";
-    private String camera = "http://104.131.163.197:3000/camera4";
+    //private String camera = "http://192.168.25.63:3000/camera";
+    private String camera = "http://104.131.163.197:3000/camera";
 
     //192.168.25.63
 
@@ -60,6 +62,7 @@ public class MainActivity extends Activity {
         mSocket.emit("enviar", "envioar");
 
         mXWalkView = (XWalkView) findViewById(R.id.xwalkWebView);
+       // XWalkSettings xWalkSettings = mXWalkView.
         mXWalkView.load(camera, null);
 
     }
