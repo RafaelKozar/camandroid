@@ -1,4 +1,4 @@
-package camera.plataformapiarobo.camerarobo;
+package camera.plataformapiarobo.camerarobo.Activity;
 
 import android.app.Activity;
 

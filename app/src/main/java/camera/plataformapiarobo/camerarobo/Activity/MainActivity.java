@@ -1,4 +1,4 @@
-package camera.plataformapiarobo.camerarobo;
+package camera.plataformapiarobo.camerarobo.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 
+import camera.plataformapiarobo.camerarobo.R;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;

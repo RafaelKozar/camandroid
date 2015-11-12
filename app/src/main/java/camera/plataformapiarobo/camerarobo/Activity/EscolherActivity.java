@@ -1,10 +1,13 @@
-package camera.plataformapiarobo.camerarobo;
+package camera.plataformapiarobo.camerarobo.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+
+import camera.plataformapiarobo.camerarobo.R;
+
 
 /**
  * Created by rafael on 11/11/2015.
