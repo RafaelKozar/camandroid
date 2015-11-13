@@ -28,14 +28,12 @@ import org.xwalk.core.internal.XWalkSettings;
 public class MainActivity extends Activity {
     //private String url = "http://192.168.25.63:3000";
     //private String camera = "http://192.168.25.63:3000/camera";
-    private String camera = "http://104.131.163.197:3000/camera";
-
-    //192.168.25.63
+    //private String camera = "http://104.131.163.197:3000/camera";
 
     //0 parar, 1 frente, 2 direita, 3 esquerda, 4 para atraz
     private String url = "http://104.131.163.197:3000/";
     private int comando = 4, antComando = 4;
-    private String idRobo;
+    public static String  idRobo;
     private TextView tComando;
     private Button bt;
     private XWalkView mXWalkView;
@@ -54,7 +52,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String teste = "hahaha";
+        String camera = "http://104.131.163.197:3000/camera/" + idRobo;
+
         mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
         mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
 
@@ -63,7 +62,6 @@ public class MainActivity extends Activity {
         mSocket.emit("enviar", "envioar");
 
         mXWalkView = (XWalkView) findViewById(R.id.xwalkWebView);
-       // XWalkSettings xWalkSettings = mXWalkView.
         mXWalkView.load(camera, null);
 
     }
