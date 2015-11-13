@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/btt_novo_robo"
-            android:src="@drawable/novoRobo" />
+            android:src="@drawable/novorobo" />
     </LinearLayout>
 
     <LinearLayout
