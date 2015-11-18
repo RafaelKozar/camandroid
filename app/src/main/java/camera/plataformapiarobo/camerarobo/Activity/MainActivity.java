@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
         mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
         mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
 
-        mSocket.on("comando", onComando);
+        mSocket.on(idRobo, onComando);
         mSocket.connect();
         mSocket.emit("enviar", "envioar");
 
@@ -91,7 +91,7 @@ public class MainActivity extends Activity {
                 @Override
                 public void run() {
                     Toast.makeText(getApplicationContext(),
-                            "ERROR", Toast.LENGTH_LONG).show();
+                            "Erro no recebimento dos sockets", Toast.LENGTH_LONG).show();
                 }
             });
         }
