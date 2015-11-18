@@ -53,6 +53,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         String camera = "http://104.131.163.197:3000/camera/" + idRobo;
+        //String camera = "http://104.131.163.197:3000/camera4";
 
         mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
         mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);

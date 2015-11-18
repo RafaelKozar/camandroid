@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00BFFF"
@@ -8,13 +9,33 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFF"
-        android:layout_margin="@dimen/margin_padrao">
+        android:layout_margin="@dimen/margin_padrao"
+        android:background="#FFF">
 
-        <ListView
-            android:id="@+id/lista_robos"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
+            android:orientation="vertical"
+            android:layout_margin="@dimen/margin_padrao"
+            android:layout_height="wrap_content">
+            <FrameLayout
+                android:background="#333"
+                android:layout_width="match_parent"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:layout_gravity="center"
+                android:text="Escolha um Robo" />
+            </FrameLayout>
+
+            <ListView
+                android:id="@+id/lista_robos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></ListView>
+        </LinearLayout>
     </FrameLayout>
 
 </LinearLayout>
