@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dimen_padrao"
+    android:layout_marginTop="@dimen/dimen_padrao"
+    android:id="@+id/layout_mensagem_cliente"
+    android:background="@color/list_background_pressed"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_mensagem_data_cliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_padrao"
+            android:textColor="@color/preto"
+            android:textSize="@dimen/letra_data" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_mensagem_paciente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/preto"
+        android:textSize="@dimen/letra_mensagem"
+        android:layout_marginLeft="@dimen/dimen_padrao"/>
+
+
+
+</LinearLayout>
+
+

@@ -4,25 +4,28 @@ package camera.plataformapiarobo.camerarobo.Models;
  * Created by Lince on 12/11/2015.
  */
 public class Robo {
-    private String nome;
-    private String id;
+    private String nomeRobo;
+    private String idRobo;
+    private String idPaciente;
+    private String nomePaciente;
     private String descricao;
 
-    public String getNome() {
-        return nome;
+    public String getNomeRobo() {
+        return nomeRobo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeRobo(String nome) {
+        this.nomeRobo = nome;
     }
 
-    public String getId() {
-        return id;
+    public String getIdRobo() {
+        return idRobo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdRobo(String id) {
+        this.idRobo = id;
     }
+
 
     public String getDescricao() {
         return descricao;
@@ -30,5 +33,21 @@ public class Robo {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(String idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
+    public String getNomePaciente() {
+        return nomePaciente;
+    }
+
+    public void setNomePaciente(String nomePaciente) {
+        this.nomePaciente = nomePaciente;
     }
 }

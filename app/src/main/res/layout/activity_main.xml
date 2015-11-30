@@ -1,34 +1,55 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-     tools:context=".MainActivity">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_background"
+    android:layout_height="match_parent">
 
-    <!--<LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Conectar"
-            android:id="@+id/conectar_robo"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/nome_robo"/>
-
-    </LinearLayout> -->
-
-    <org.xwalk.core.XWalkView
-        android:id="@+id/xwalkWebView"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_padrao"
         android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="#000000"
-        />
+        android:weightSum="10"
+        tools:context=".MainActivity">
 
 
-</LinearLayout>
+        <org.xwalk.core.XWalkView
+            android:id="@+id/xwalkWebView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:background="#000000"
+            android:orientation="vertical" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btt_atualizar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="#1E90FF"
+                android:text="Atualizar" />
+
+
+            <Button
+                android:id="@+id/btt_mensagem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="#1E90FF"
+                android:text="Mesagens" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>

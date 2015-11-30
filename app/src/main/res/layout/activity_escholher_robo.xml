@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFF"
                 android:layout_gravity="center"
-                android:text="Escolha um Robo" />
+                android:text="Escolha o Paciente" />
             </FrameLayout>
 
             <ListView

@@ -9,31 +9,31 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import camera.plataformapiarobo.camerarobo.Models.Robo;
+import camera.plataformapiarobo.camerarobo.Models.Mensagem;
 import camera.plataformapiarobo.camerarobo.R;
 
 /**
  * Created by rafael on 12/11/2015.
  */
-public class RobosAdapter extends BaseAdapter {
+public class MensagemAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
-    private List<Robo> robos;
+    private List<Mensagem> mensagems;
 
-    public RobosAdapter(Context context, List<Robo> robos){
+    public MensagemAdapter(Context context, List<Mensagem> mensagems){
         this.inflater = (LayoutInflater)  context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.robos = robos;
+        this.mensagems= mensagems;
     }
 
 
     @Override
     public int getCount() {
-        return robos.size();
+        return mensagems.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return robos.get(position);
+        return mensagems.get(position);
     }
 
     @Override
@@ -43,8 +43,15 @@ public class RobosAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = inflater.inflate(R.layout.item_robo, null);
-        ((TextView) (v.findViewById(R.id.nome_robo))).setText(robos.get(position).getNomePaciente());
+        View v = null;
+        if(mensagems.get(position).getIsSendPaciente()){
+            v = inflater.inflate(R.layout.item_mensagens_server, null);
+            ((TextView) (v.findViewById(R.id.text_mensagem_paciente))).setText(mensagems.get(position).getMsg());
+        }
+        else {
+            v = inflater.inflate(R.layout.item_mensagens_server, null);
+            ((TextView) (v.findViewById(R.id.text_mensagem_server))).setText(mensagems.get(position).getMsg());
+        }
         return v;
     }
 }

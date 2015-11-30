@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -46,13 +47,19 @@ public class ListarRoboActivity extends Activity {
     private ListView listView;
     private String idRobo;
     private List<Robo> robos;
+    private int pacienteTapped;
     private BD bd;
     //192.168.25.63
-    private static String url = "http://104.131.163.197:3000/listarrobosandroid",
-            urlVerifica = "http://104.131.163.197:3000/verificarobo";
+    //private static String url = "http://104.131.163.197:3000/listarpacientesandroid",
+    //        urlVerifica = "http://104.131.163.197:3000/verificarobo",
+    //       urlUpdate = "http://104.131.163.197:3000/mudastatuspaciente";
 
-    //private static String url = "http://192.168.25.63:3000/listarrobosandroid",
-    //        urlVerifica = "http://192.168.25.63:3000/verificarobo";
+    private Button bttAtualizar, bttMensagem;
+
+    private static String url = "http://192.168.1.106:3000/listarpacientesandroid",
+            urlVerifica = "http://192.168.1.106:3000/verificarobo",
+            urlUpdate = "http://192.168.1.106:3000/mudastatuspaciente";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,25 @@ public class ListarRoboActivity extends Activity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        bttAtualizar = (Button) findViewById(R.id.btt_atualizar);
+        bttMensagem = (Button) findViewById(R.id.btt_mensagem);
+
+        /*bttAtualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+        bttMensagem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListarRoboActivity.this, ActivityMensagens.class);
+                startActivity(intent);
+            }
+        }); */
     }
 
     public void setListView() {
@@ -78,9 +104,10 @@ public class ListarRoboActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MainActivity.idRobo = robos.get(position).getId();
-                Intent it = new Intent(ListarRoboActivity.this, MainActivity.class);
-                startActivity(it);
+                MainActivity.idRobo = robos.get(position).getIdRobo();
+                pacienteTapped = position;
+                //Intent it = new Intent(ListarRoboActivity.this, MainActivity.class);
+                //startActivity(it);
             }
         });
         adapterRobo = new RobosAdapter(getApplicationContext(), robos);
@@ -92,13 +119,18 @@ public class ListarRoboActivity extends Activity {
         String result = bd.buscar();
         if(result != null){
             MainActivity.idRobo = result;
-            Intent it = new Intent(ListarRoboActivity.this, MainActivity.class);
-            startActivity(it);
+            HashMap<String, String> param = new HashMap<>();
+            param.put("idRobo", idRobo);
+            verificaRobo(param);
+            //Intent it = new Intent(ListarRoboActivity.this, MainActivity.class);
+            //startActivity(it);
         }
     }
 
 
     public void verificaRobo(Map param) {
+        NetworkConnection networkConnection = NetworkConnection.getInstance(getApplicationContext());
+
         CustomRequest request = new CustomRequest(Request.Method.POST, urlVerifica, param,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -110,6 +142,7 @@ public class ListarRoboActivity extends Activity {
                                 MainActivity.idRobo = idRobo;
                                 Intent it = new Intent(ListarRoboActivity.this, MainActivity.class);
                                 startActivity(it);
+                                atualizaPaciente();
                             } else
                                 buscaRobos();
 
@@ -123,32 +156,18 @@ public class ListarRoboActivity extends Activity {
                 return;
             }
         });
-    }
 
-    private void makeJsonArryReq() {
-        NetworkConnection networkConnection = NetworkConnection.getInstance(getApplicationContext());
-        JsonArrayRequest req = new JsonArrayRequest("http://api.androidhive.info/volley/person_array.json",
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.d("eee", response.toString());
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("iii", "Error: " + error.getMessage());
-
-            }
-        });
-        req.setRetryPolicy(new DefaultRetryPolicy(8000, 0,
+        request.setRetryPolicy(new DefaultRetryPolicy(30000, 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        networkConnection.addRequestQueue(req);
+
+        networkConnection.addRequestQueue(request);
     }
 
 
     public void buscaRobos() throws JSONException {
         NetworkConnection networkConnection = NetworkConnection.getInstance(getApplicationContext());
+
         CustomRequest request = new CustomRequest(Request.Method.POST, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -158,14 +177,21 @@ public class ListarRoboActivity extends Activity {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject roboJSON = response.getJSONObject(i);
+                                if(roboJSON.getString("robo").isEmpty() || "true".contentEquals(roboJSON.getString("isTablet"))) continue;
                                 Robo robo = new Robo();
-                                robo.setNome(roboJSON.getString("nome"));
-                                robo.setId(roboJSON.getString("_id"));
+
+                                robo.setNomeRobo(roboJSON.getString("robo"));
+                                robo.setIdRobo(roboJSON.getString("idRobo"));
+
+                                robo.setNomePaciente(roboJSON.getString("nome"));
+                                robo.setIdPaciente(roboJSON.getString("_id"));
+
                                 robos.add(robo);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
+
                         setListView();
                     }
                 }, new Response.ErrorListener() {
@@ -178,6 +204,40 @@ public class ListarRoboActivity extends Activity {
         request.setRetryPolicy(new DefaultRetryPolicy(30000, 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
+
         networkConnection.addRequestQueue(request);
     }
+
+
+
+    public void atualizaPaciente(){
+        NetworkConnection networkConnection = NetworkConnection.getInstance(getApplicationContext());
+        HashMap<String, String> param = new HashMap<>();
+        param.put("idPaciente", robos.get(pacienteTapped).getIdPaciente());
+        CustomRequest request = new CustomRequest(Request.Method.POST, urlUpdate, param,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            JSONObject object = (JSONObject) response.get(0);
+                            String resposta = object.getString("resposta");
+                            Log.i("resposta", resposta);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                return;
+            }
+        });
+
+        request.setRetryPolicy(new DefaultRetryPolicy(30000, 0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        networkConnection.addRequestQueue(request);
+    }
+
 }
