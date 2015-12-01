@@ -50,15 +50,16 @@ public class ListarRoboActivity extends Activity {
     private int pacienteTapped;
     private BD bd;
     //192.168.25.63
-    //private static String url = "http://104.131.163.197:3000/listarpacientesandroid",
-    //        urlVerifica = "http://104.131.163.197:3000/verificarobo",
-    //       urlUpdate = "http://104.131.163.197:3000/mudastatuspaciente";
+    private static String url = "http://104.131.163.197:3000/listarpacientesandroid",
+            urlVerifica = "http://104.131.163.197:3000/verificarobo",
+           urlUpdate = "http://104.131.163.197:3000/mudastat" +
+                   "uspaciente";
 
     private Button bttAtualizar, bttMensagem;
 
-    private static String url = "http://192.168.1.106:3000/listarpacientesandroid",
-            urlVerifica = "http://192.168.1.106:3000/verificarobo",
-            urlUpdate = "http://192.168.1.106:3000/mudastatuspaciente";
+    //private static String url = "http://192.168.1.106:3000/listarpacientesandroid",
+    //        urlVerifica = "http://192.168.1.106:3000/verificarobo",
+    //        urlUpdate = "http://192.168.1.106:3000/mudastatuspaciente";
 
 
     @Override
@@ -106,8 +107,8 @@ public class ListarRoboActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MainActivity.idRobo = robos.get(position).getIdRobo();
                 pacienteTapped = position;
-                //Intent it = new Intent(ListarRoboActivity.this, MainActivity.class);
-                //startActivity(it);
+                Intent it = new Intent(ListarRoboActivity.this, MainActivity.class);
+                startActivity(it);
             }
         });
         adapterRobo = new RobosAdapter(getApplicationContext(), robos);
