@@ -4,8 +4,9 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="margin_padrao">25dp</dimen>
     <dimen name="margin_padrao2">17dp</dimen>
-    <dimen name="margin_item">6dp</dimen>
+    <dimen name="margin_item">10dp</dimen>
     <dimen name="dimen_padrao">5dp</dimen>
     <dimen name="letra_data">10dp</dimen>
+
     <dimen name="letra_mensagem">16dp</dimen>
 </resources>

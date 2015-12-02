@@ -80,24 +80,7 @@ public class ListarRoboActivity extends Activity {
             e.printStackTrace();
         }
 
-        bttAtualizar = (Button) findViewById(R.id.btt_atualizar);
-        bttMensagem = (Button) findViewById(R.id.btt_mensagem);
 
-        /*bttAtualizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                startActivity(getIntent());
-            }
-        });
-
-        bttMensagem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListarRoboActivity.this, ActivityMensagens.class);
-                startActivity(intent);
-            }
-        }); */
     }
 
     public void setListView() {
@@ -106,6 +89,7 @@ public class ListarRoboActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MainActivity.idRobo = robos.get(position).getIdRobo();
+                MainActivity.idPaciente = robos.get(position).getIdPaciente();
                 pacienteTapped = position;
                 Intent it = new Intent(ListarRoboActivity.this, MainActivity.class);
                 startActivity(it);

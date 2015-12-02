@@ -7,6 +7,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nome_robo"
+        android:textSize="@dimen/letra_mensagem"
+        android:padding="@dimen/margin_item"
         android:layout_margin="@dimen/margin_item"
         android:textColor="#000"/>
 

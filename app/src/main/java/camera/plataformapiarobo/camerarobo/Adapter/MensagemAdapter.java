@@ -49,8 +49,8 @@ public class MensagemAdapter extends BaseAdapter {
             ((TextView) (v.findViewById(R.id.text_mensagem_paciente))).setText(mensagems.get(position).getMsg());
         }
         else {
-            v = inflater.inflate(R.layout.item_mensagens_server, null);
-            ((TextView) (v.findViewById(R.id.text_mensagem_server))).setText(mensagems.get(position).getMsg());
+            v = inflater.inflate(R.layout.item_mensagens_paciente, null);
+            ((TextView) (v.findViewById(R.id.text_mensagem_paciente))).setText(mensagems.get(position).getMsg());
         }
         return v;
     }

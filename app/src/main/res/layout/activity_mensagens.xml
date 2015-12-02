@@ -29,6 +29,7 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/list_msgs"
                 android:layout_margin="@dimen/dimen_padrao"
                 android:layout_weight="2"></ListView>
 
@@ -43,9 +44,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="8"
+                    android:id="@+id/btt_enviar"
                     android:background="@android:drawable/ic_menu_send" />
 
                 <EditText
+                        android:id="@+id/campo_mensagem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="2" />
