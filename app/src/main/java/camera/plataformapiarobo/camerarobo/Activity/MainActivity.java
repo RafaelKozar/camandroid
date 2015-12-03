@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
 
     //0 parar, 1 frente, 2 direita, 3 esquerda, 4 para atraz
     private String url = "http://104.131.163.197:3000/";
+    //private String url = "http://192.168.1.106:3000/";
     private int comando = 4, antComando = 4;
     public static String  idRobo, idPaciente;
     private TextView tComando;
@@ -62,7 +63,7 @@ public class MainActivity extends Activity {
         mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
 
         mSocket.on(idRobo, onComando);
-        mSocket.on(idRobo + "mensagem", onMenssagem);
+        //mSocket.on(idRobo + "mensagem", onMenssagem);
         mSocket.connect();
         mSocket.emit("enviar", "envioar");
 
@@ -108,7 +109,7 @@ public class MainActivity extends Activity {
         }
     };
 
-    private Emitter.Listener onMenssagem = new Emitter.Listener() {
+    /*private Emitter.Listener onMenssagem = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
             JSONObject data = (JSONObject) args[0];
@@ -117,7 +118,7 @@ public class MainActivity extends Activity {
                 Mensagem msg = new Mensagem();
                 msg.setMsg(data.getString("mensagem"));
                 msg.setIsSendPaciente(false);
-                ActivityMensagens.mensagens.add(msg);
+              //  ActivityMensagens.mensagens.add(msg);
                 Toast.makeText(getApplicationContext(), "Atendente te enviou: " + msg.getMsg(),
                         Toast.LENGTH_SHORT).show();
 
@@ -126,7 +127,7 @@ public class MainActivity extends Activity {
             }
 
         }
-    };
+    }; */
 
     private Emitter.Listener onConnectError = new Emitter.Listener() {
         @Override

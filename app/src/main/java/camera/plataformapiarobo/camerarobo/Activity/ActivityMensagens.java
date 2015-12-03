@@ -30,10 +30,11 @@ import io.socket.emitter.Emitter;
  */
 public class ActivityMensagens extends Activity {
 
-    public static List<Mensagem> mensagens = new ArrayList<Mensagem>();
+    //public static List<Mensagem> mensagens = new ArrayList<Mensagem>();
+    private List<Mensagem> mensagens = new ArrayList<Mensagem>();
     private MensagemAdapter adapter;
-    //private String conection = "http://104.131.163.197:3000/";
-    private String conection = "http://192.168.1.106:3000/";
+    private String conection = "http://104.131.163.197:3000/";
+    //private String conection = "http://192.168.1.106:3000/";
     private EditText myMsg;
     private String msgText;
     private ListView listView;
@@ -58,6 +59,8 @@ public class ActivityMensagens extends Activity {
         mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
         mSocket.on(MainActivity.idRobo + "mensagem", onMenssagem);
 
+        mensagens = new ArrayList<Mensagem>();
+
         myMsg = (EditText) findViewById(R.id.campo_mensagem);
         bttEnviar = (ImageButton) findViewById(R.id.btt_enviar);
         listView = (ListView) findViewById(R.id.list_msgs);
@@ -70,11 +73,19 @@ public class ActivityMensagens extends Activity {
                     Mensagem msg = new Mensagem();
                     msg.setIsSendPaciente(true);
                     msg.setMsg(msgText);
-                    HashMap<String, String> param = new HashMap<String, String>();
-                    param.put("mensagem", msgText);
-                    param.put("idPaciente", MainActivity.idPaciente);
+                    //HashMap<String, String> param = new HashMap<String, String>();
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("mensagem", msgText);
+                        jsonObject.put("idPaciente", MainActivity.idPaciente);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    //param.put("mensagem", msgText);
+                    //param.put("idPaciente", MainActivity.idPaciente);
                     mensagens.add(msg);
-                    mSocket.emit("msgPaciente", param);
+                    mSocket.emit("msgPaciente", jsonObject);
                     setListView();
                     //adapter.notifyDataSetChanged();
                 }
@@ -91,16 +102,14 @@ public class ActivityMensagens extends Activity {
     private Emitter.Listener onMenssagem = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            JSONObject data = (JSONObject) args[0];
+            //JSONObject data = (JSONObject) args[0];
+            String data = (String) args[0];
 
-            try {
-                Mensagem msg = new Mensagem();
-                msg.setMsg(data.getString("mensagem"));
-                msg.setIsSendPaciente(false);
-                mensagens.add(msg);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            Mensagem msg = new Mensagem();
+            msg.setMsg(data);
+            msg.setIsSendPaciente(false);
+            mensagens.add(msg);
+            setListView();
 
         }
     };

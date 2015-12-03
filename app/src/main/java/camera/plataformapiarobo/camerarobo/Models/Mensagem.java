@@ -8,7 +8,7 @@ public class Mensagem {
     private Boolean isSendPaciente;
 
     public String getMsg() {
-        return msg;
+        return this.msg;
     }
 
     public void setMsg(String msg) {

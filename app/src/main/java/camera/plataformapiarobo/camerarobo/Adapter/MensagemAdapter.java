@@ -22,7 +22,7 @@ public class MensagemAdapter extends BaseAdapter {
 
     public MensagemAdapter(Context context, List<Mensagem> mensagems){
         this.inflater = (LayoutInflater)  context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.mensagems= mensagems;
+        this.mensagems = mensagems;
     }
 
 
@@ -43,14 +43,14 @@ public class MensagemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = null;
+        View v;
         if(mensagems.get(position).getIsSendPaciente()){
-            v = inflater.inflate(R.layout.item_mensagens_server, null);
+            v = inflater.inflate(R.layout.item_mensagens_paciente, null);
             ((TextView) (v.findViewById(R.id.text_mensagem_paciente))).setText(mensagems.get(position).getMsg());
         }
         else {
-            v = inflater.inflate(R.layout.item_mensagens_paciente, null);
-            ((TextView) (v.findViewById(R.id.text_mensagem_paciente))).setText(mensagems.get(position).getMsg());
+            v = inflater.inflate(R.layout.item_mensagens_server, null);
+            ((TextView) (v.findViewById(R.id.text_mensagem_server))).setText(mensagems.get(position).getMsg());
         }
         return v;
     }

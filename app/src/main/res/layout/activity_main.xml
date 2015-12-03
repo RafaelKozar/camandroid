@@ -26,7 +26,8 @@
             android:layout_height="match_parent"
             android:layout_weight="37"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum=
+                "2">
 
             <Button
                 android:id="@+id/btt_atualizar"
