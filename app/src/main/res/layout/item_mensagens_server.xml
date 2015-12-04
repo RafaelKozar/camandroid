@@ -12,6 +12,7 @@
 
     <LinearLayout
         android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/margin_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -37,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/letra_mensagem"
+            android:layout_gravity="right"
             android:textColor="@color/preto"
             android:layout_marginLeft="@dimen/dimen_padrao"
             android:id="@+id/text_mensagem_server"
